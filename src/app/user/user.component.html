@@ -1,0 +1,19 @@
+
+
+<h2>{{'below are the registration so far...' | titlecase}}</h2>
+<table>
+    <tr>
+        <th>s.no</th>
+        <th>name</th>
+        <th>pet type</th>
+        <th>agreed date</th>
+        <th>edit</th>
+   </tr>
+   <tr *ngFor="let data of response;let i=index">
+       <td>{{i+1}}</td>
+       <td>{{data.firstName}}</td>
+       <td>{{data.pet}}</td>
+       <td>{{data.date}}</td>
+       <td><button (click)="handle(data.key)" >edit</button></td>
+   </tr>
+</table>

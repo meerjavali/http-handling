@@ -1,0 +1,115 @@
+<!-- 
+Template Driven forms
+Reactive Forms
+-->
+
+<!-- template driven forms: -->
+<form  
+  #userForm="ngForm"
+  (ngSubmit)="handleSubmit(userForm)"
+  class="formContainer"
+>
+  <div class="form-group">
+    <label>First Name: </label>
+    <input
+      type="text"
+      placeholder="firstName"
+      ngModel
+      #fname="ngModel"
+      name="firstName"
+      minlength="4"
+      required
+    />
+  </div>
+
+  <!-- <div *ngIf="fname.errors && (fname.dirty || fname.touched)"> -->
+  <!-- <p *ngIf="fname.errors['required'] && fname.touched" ngClass="error">
+    {{ "firstName required" | titlecase }}
+  </p>
+  <p *ngIf="fname.errors['minlength']" ngClass="error">
+    {{ "firstName should be atleast 4 characters" | titlecase }}
+  </p> -->
+
+  <div class="form-group">
+    <label>Last Name: </label>
+    <input
+      type="text"
+      placeholder="lastName"
+      ngModel
+      #lname="ngModel"
+      name="lastName"
+      minlength="2"
+      required
+    />
+  </div>
+
+  <!-- <p *ngIf="lname.errors['required'] && lname.touched" ngClass="error">
+    {{ "lastName required" | titlecase }}
+  </p>
+  <p *ngIf="lname.errors['minlength']" ngClass="error">
+    {{ "lastName should be atleast 2 characters" | titlecase }}
+  </p> -->
+
+  <div class="form-group">
+    <label>Which pet do you like to pet?</label>
+    <div>
+      <input type="radio" value="dog" ngModel #pet="ngModel" name="pet" /> Dog
+    </div>
+    <div>
+      <input type="radio" value="cat" ngModel #pet="ngModel" name="pet" /> Cat
+    </div>
+    <div>
+      <input type="radio" value="frog" ngModel #pet="ngModel" name="pet" /> Frog
+    </div>
+  </div>
+  <div
+    [ngSwitch]="userForm.value.pet"
+    class="form-group"
+    [ngStyle]="{ color: 'grey' }"
+  >
+    <p *ngSwitchCase="'dog'">wuhu! Dog person</p>
+    <p *ngSwitchCase="'cat'">wuhu! Cat person</p>
+    <p *ngSwitchCase="'frog'">wuhu! Frog person</p>
+    <p *ngSwitchDefault>Dont like pets ? 0_0</p>
+  </div>
+
+  <div class="form-group">
+    <div>
+      <input type="checkbox" name="terms" ngModel #terms="ngModel" required />
+      <label>Accept terms & conditions *</label>
+    </div>
+  </div>
+
+  <!-- <p *ngIf="!userForm.value.terms.checked" class="error">
+    Checkbox required
+  </p> -->
+
+  <input type="submit" value="submit"  />
+</form>
+
+<p *ngIf="flag">
+  Hi, {{ userForm.value.firstName }} {{ userForm.value.lastName }}!!
+  Pets you like to pet - {{userForm.value.pet}}.
+  You have accepted terms and conditions.
+</p>
+
+<!-- 
+ form control - 
+ form group
+ form array 
+
+Reactive Forms:
+ if we have some special use cases and we want more control over the form, we can explicitly create
+ such control objects. The forms created this way are called reactive forms.
+
+ template driven forms:
+ we can provide some directives in the template of the form and angular can create such controls under the hood for us.
+ forms created in this way are called template driven forms.
+
+features:
+- template driven forms use two-way data binding to update the data model in the component as changes are made in the template and vice-versa
+- you can build almost any kind of forms with an angular template - login forms, contact forms and pretty much any business form
+- You can lay out the controls creatively and bind them to the data in your object model.
+
+
+-->
